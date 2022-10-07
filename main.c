@@ -23,17 +23,13 @@ void inject_event(int device, __u16 code, __s32 value) {
 	write(device, &event_end, sizeof(event_end));
 }
 
-void handle_key(int mouse, __u16 bt_code, __s32 value, bool modkey_down) {
-	switch (value) {
-		case 1:
-			/* if (modkey_down) { */
-			inject_event(mouse, bt_code, 1);
-			/* } */
-			break;
-		case 0:
-			inject_event(mouse, bt_code, 0);
-			break;
-	}
+void mouse_click(int device, __u16 code) {
+	inject_event(device, code, 1);
+	inject_event(device, code, 0);
+}
+
+void mouse_down(int device, __u16 code) {
+	inject_event(device, code, 1);
 }
 
 int main() {
@@ -60,13 +56,24 @@ int main() {
 					}
 					break;
 				case KEY_7: // mouse left
-					handle_key(mouse, 272, event.value, modkey_down);
+					if (event.value == 0) {
+						mouse_click(mouse, 272);
+					}
 					break;
 				case KEY_8: // mouse right
-					handle_key(mouse, 273, event.value, modkey_down);
+					if (event.value == 0) {
+						mouse_click(mouse, 273);
+					}
 					break;
 				case KEY_Y: // mouse middle
-					handle_key(mouse, 274, event.value, modkey_down);
+					if (event.value == 0) {
+						mouse_click(mouse, 274);
+					}
+					break;
+				case KEY_U: // hold left mouse
+					if (event.value == 0) {
+						mouse_down(mouse, 272);
+					}
 					break;
 			}
 		}
