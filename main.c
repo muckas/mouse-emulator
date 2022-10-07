@@ -8,7 +8,7 @@
 #include <sys/time.h>
 #include <argp.h>
 
-const char *argp_program_version = "mouse-emulator 0.1.0";
+const char *argp_program_version = "mouse-emulator v0.1.0";
 static char doc[] = "Emulates mouse actions with keyboard keys\n Keycodes defined in linux/input-event-codes.h";
 static char args_doc[] = "--input [FILE] --output [FILE]";
 static struct argp_option options[] = {
@@ -124,19 +124,19 @@ int main(int argc, char *argv[]) {
 					modkey_down = false;
 				}
 			} else if (event.code == arguments.MouseLeft) {
-				if (event.value == 0) {
+				if (event.value == 0 && (modkey_down || arguments.Mod == 0)) { 
 					mouse_click(mouse, 272);
 				}
 			} else if (event.code == arguments.MouseLeftHold) {
-				if (event.value == 0) {
+				if (event.value == 0 && (modkey_down || arguments.Mod == 0)) { 
 					mouse_down(mouse, 272);
 				}
 			} else if (event.code == arguments.MouseRight) {
-				if (event.value == 0) {
+				if (event.value == 0 && (modkey_down || arguments.Mod == 0)) { 
 					mouse_click(mouse, 273);
 				}
 			} else if (event.code == arguments.MouseMiddle) {
-				if (event.value == 0) {
+				if (event.value == 0 && (modkey_down || arguments.Mod == 0)) { 
 					mouse_click(mouse, 274);
 				}
 			}
