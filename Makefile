@@ -1,9 +1,13 @@
 CC=gcc
-FLAGS=-lX11 -lXtst
+FLAGS=
 OUT=mouse-emulator
 
 $(OUT): main.c
 	$(CC) $(FLAGS) -o $(OUT) main.c
+
+debug: main.c
+	$(CC) -g $(FLAGS) -o $(OUT) main.c
+	gdb $(OUT)
 
 .PHONY: clean
 clean:
