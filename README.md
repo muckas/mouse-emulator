@@ -1,5 +1,5 @@
 # mouse-emulator
-Listens to keyboard input events and inject input events into a mouse device on linux
+Listens to keyboard input events and injects input events into a mouse device on linux
 
 A physical mouse needs to be connected
 
