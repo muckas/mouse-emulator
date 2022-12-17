@@ -7,7 +7,15 @@ $(OUT): main.c
 
 debug: main.c
 	$(CC) -g $(FLAGS) -o $(OUT) main.c
-	gdb $(OUT)
+
+install:
+	@echo installing to ${DESTDIR}${PREFIX}/bin
+	@cp -f $(OUT) ${DESTDIR}${PREFIX}/bin
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/multicopy
+
+uninstall:
+	@echo removing ${DESTDIR}${PREFIX}/bin/$(OUT)
+	@rm -f ${DESTDIR}${PREFIX}/bin/$(OUT)
 
 .PHONY: clean
 clean:
